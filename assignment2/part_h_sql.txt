@@ -1,0 +1,5 @@
+SELECT A.docid, B.docid 
+FROM frequency A, frequency B
+WHERE A.docid < B.docid
+GROUP BY A.docid, B.docid
+LIMIT 5;

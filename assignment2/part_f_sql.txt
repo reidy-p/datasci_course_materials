@@ -1,0 +1,10 @@
+SELECT count(*)
+FROM
+    (SELECT distinct docid 
+    FROM frequency
+    WHERE term = 'transactions' 
+    INTERSECT
+    SELECT distinct docid
+    FROM frequency
+    WHERE term = 'world')
+
