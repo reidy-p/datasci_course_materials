@@ -1,0 +1,7 @@
+SELECT sum(A.count * B.count) as similarity_score
+FROM table_view A, table_view B
+WHERE A.term = B.term
+AND A.docid = 'q'
+GROUP BY A.docid, B.docid
+ORDER BY similarity_score desc
+LIMIT 1;

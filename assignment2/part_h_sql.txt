@@ -1,5 +1,6 @@
-SELECT A.docid, B.docid 
+SELECT sum(A.count * B.count)
 FROM frequency A, frequency B
-WHERE A.docid < B.docid
-GROUP BY A.docid, B.docid
-LIMIT 5;
+WHERE A.term = B.term
+AND A.docid = '10080_txt_crude'
+AND B.docid = '17035_txt_earn'
+GROUP BY A.docid, B.docid;
