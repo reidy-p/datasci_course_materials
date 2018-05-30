@@ -1,0 +1,72 @@
+Part 1
+I have chosen the Titanic: Machine Learning from Disaster competition. 
+The goal of the competition is to predict whether a passenger survived
+the sinking of the Titanic or not. The data consists of ten variables
+and we are trying to predict the binary survival outcome based on the
+other variables which include the passenger's gender, age, fare paid, 
+etc. The evaluation metric is the percentage of passengers that are
+correctly predicted as survived or not survived.  
+
+Part 2
+I began by looking at the available variables in the training dataset
+and trying to understand what features might be good predictors of
+survival. I focused on the numerical columns first and calculated
+the correlation between Survived and all of the numerical columns. I
+noticed that there was a negative correlation 
+between Survived and Age and a positive correlation between Survived 
+Fare. There was also a negative correlation between Pclass and
+Survived but it is important to remember that Pclass may be better
+modelled as a categorical variable because if we interpreted it as a
+numeric variable we would be assuming that there is the same distance
+between first class and second class as that between second class and 
+third class, for example. I decided to proceed with a simple model 
+using only Age and Fare to try to predict Survived and use a Logistic
+Regression. After checking the performance of this simple model I then
+decided to try to include more features to get a better result as discussed
+in later answers. 
+
+Part 3
+I loaded the train.csv data into a pandas DataFrame and I used the 
+dtypes attribute and the corr method to show the variable types 
+and correlations for the numeric variables respectively. Next, I 
+instantiated a LogisticRegression model from the scikit-learn library
+and fit it using Age and Fare as the features to predict Survived.
+However, I got an error message stating that some rows had null values
+so I then dropped any rows from the training data
+that contained any null values for Age, Fare or Survived. I then
+evaluated the model using the accuracy_score function from the 
+scikit-learn library. Next, I decided to try to improve the model
+by including the other numeric variables except PassengerId. I excluded
+this variable because it should not be a useful predictor of survival
+probability. I also included the categorical variables Sex, 
+Pclass and Embarked. However, I needed a convenient way to encode these
+as dummy variables for each unique value rather than simply treating
+them as numeric variables (also known as One-Hot Encoding).  
+I found the get_dummies function from the pandas library useful 
+for this purpose. After fitting a Logistic Regression using 
+these new features I calculated the accuracy score again. 
+Finally, I used the same features but used the Support Vector 
+Machine model from the scikit-learn library to
+try to improve performance further.
+
+Part 4
+The initial model did not work very well and achieved an accuracy of 0.6583
+on the training dataset. One reason why it may not have worked very
+well is that we have omitted both the Sex and Pclass features which
+we would expect would be very important in predicting survival. A 
+second potential issue is that we have only used a simple linear 
+Logistic Regression model and a more powerful model such as Random
+Forest, SVM, or Neural Network may perform better.
+
+Part 5
+I used two methods to improve the solution. First, I added in the 
+categorical variables Sex, Pclass and Embarked. As noted earlier, it
+is important to encode this as binary dummary variables for each
+category of these variables rather than simply including them as 
+feature column. Using these features with the same simple linear
+Logistic Regression model raises the accuracy to 0.8020. Next, I 
+change the model to a Support Vector Machine and use the same features.
+This raises the accuracy further to 0.8961. Overall, this shows that
+making some very quick changes to the simple model allows for
+significant performance improvements. 
+
